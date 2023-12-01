@@ -19,9 +19,7 @@ export class TodoListComponent {
 
   addTodo(input: HTMLInputElement) {
     if (!input.value) return;
-
     this.store.dispatch(addTodo({ title: input.value }));
-
     input.value = '';
   }
 

@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { addTodo, clearTodos, removeTodo, toggleTodo } from './actions';
+
 // State Interface
 export interface IAppState {
     todos: any[];
@@ -37,7 +38,7 @@ const _todoReducer = createReducer(
     }),
     on(removeTodo, (state, { id }) => ({
         ...state,
-        todos: state.todos.filter(t => t.id !== id),
+        todos: state.todos.filter(t => !(t.id === id)),
         lastUpdate: new Date(),
     })),
     on(clearTodos, state => ({

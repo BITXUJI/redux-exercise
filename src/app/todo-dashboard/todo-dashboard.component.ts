@@ -14,8 +14,8 @@ export class TodoDashboardComponent {
   lastUpdate$: Observable<Date | null>;
 
   constructor(private store: Store<{ tdd: IAppState }>) {
-    this.todos$ = this.store.pipe(select(state => state.tdd.todos));       // Use the select method with your selector
-    this.lastUpdate$ = this.store.pipe(select(state => state.tdd.lastUpdate)); // Same as above for lastUpdate
+    this.todos$ = this.store.select(state => state.tdd.todos);       // Use the select method with your selector
+    this.lastUpdate$ = this.store.select(state => state.tdd.lastUpdate); // Same as above for lastUpdate
   }
 
   clearTodos() {
