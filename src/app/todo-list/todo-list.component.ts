@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { Todo, TodoService } from '../todo.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { addTodo, toggleTodo, removeTodo } from '../actions';
+import { IAppState } from '../reducer';
+
 
 @Component({
   selector: 'app-todo-list',
@@ -7,23 +11,25 @@ import { Todo, TodoService } from '../todo.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
-  // Read the comment in TodoService
-  constructor(public service: TodoService) {
+  todos$: Observable<any[]>;
+
+  constructor(private store: Store<{ tdl: IAppState }>) {
+    this.todos$ = this.store.select(state => state.tdl.todos);
   }
 
   addTodo(input: HTMLInputElement) {
     if (!input.value) return;
 
-    this.service.addTodo(input.value);
+    this.store.dispatch(addTodo({ title: input.value }));
 
     input.value = '';
   }
 
-  toggleTodo(todo: Todo) {
-    this.service.toggleTodo(todo);
+  toggleTodo(todoId: number) {
+    this.store.dispatch(toggleTodo({ id: todoId }));
   }
 
-  removeTodo(todo: Todo) {
-    this.service.removeTodo(todo);
+  removeTodo(todoId: number) {
+    this.store.dispatch(removeTodo({ id: todoId }));
   }
 }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { TodoService } from '../todo.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IAppState } from '../reducer';
+import { clearTodos } from '../actions';
 
 @Component({
   selector: 'app-todo-dashboard',
@@ -7,34 +10,15 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-dashboard.component.css']
 })
 export class TodoDashboardComponent {
-  todos: number;
-  lastUpdate: any;
+  todos$: Observable<any[]>;
+  lastUpdate$: Observable<Date | null>;
 
-  // Read the comment in TodoService
-  constructor(private service: TodoService) {
-    this.todos = service.getTodos().length;
-
-    service.todoAdded.subscribe(() => {
-      this.todos++;
-      this.lastUpdate = new Date();
-    });
-
-    service.todoRemoved.subscribe(() => {
-      this.todos--;
-      this.lastUpdate = new Date();
-    });
-
-    service.todoToggled.subscribe(() => {
-      this.lastUpdate = new Date();
-    });
-
-    service.todosCleared.subscribe(() => {
-      this.todos = 0;
-      this.lastUpdate = new Date();
-    });
+  constructor(private store: Store<{ tdd: IAppState }>) {
+    this.todos$ = this.store.pipe(select(state => state.tdd.todos));       // Use the select method with your selector
+    this.lastUpdate$ = this.store.pipe(select(state => state.tdd.lastUpdate)); // Same as above for lastUpdate
   }
 
   clearTodos() {
-    this.service.clearTodos();
+    this.store.dispatch(clearTodos()); // Assuming clearTodos is an action creator
   }
 }
