@@ -25,10 +25,14 @@ import { Injectable, EventEmitter } from '@angular/core';
 // like undo/redo, plus we get great tools for debugging our application as you'll see in the 
 // next lecture. 
 
-
+export interface Todo {
+  id: number,
+  title: string,
+  isCompleted?: boolean
+}
 @Injectable()
 export class TodoService {
-  private todos: any[] = [];
+  private todos: Todo[] = [];
   public todoAdded = new EventEmitter();
   public todoToggled = new EventEmitter();
   public todoRemoved = new EventEmitter();
@@ -40,12 +44,12 @@ export class TodoService {
     this.todoAdded.emit(todo);
   }
 
-  toggleTodo(todo: any) {
+  toggleTodo(todo: Todo) {
     todo.isCompleted = !todo.isCompleted;
     this.todoToggled.emit(todo);
   }
 
-  removeTodo(todo: any) {
+  removeTodo(todo: Todo) {
     var index = this.todos.indexOf(todo);
     this.todos.splice(index, 1);
     this.todoRemoved.emit(todo);
