@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addTodo, toggleTodo, removeTodo, fetchTodosSuccess } from '../actions';
+import { addTodo, toggleTodo, removeTodo } from '../actions';
 import { IAppState } from '../reducer';
 import { TodoService } from '../todo.service';
 
@@ -20,11 +20,7 @@ export class TodoListComponent {
     this.todos$ = this.store.select(state => state.tdl.todos);
   }
   ngOnInit() {
-    this.service.getTodos().subscribe(
-      serviceTodos => {
-        this.store.dispatch(fetchTodosSuccess({ todos: serviceTodos }));
-      }
-    );
+    this.service.loadTodos();
   }
 
   addTodo(input: HTMLInputElement) {
