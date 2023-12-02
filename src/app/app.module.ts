@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
 import { todoReducer } from './reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { todoReducer } from './reducer';
     BrowserModule,
     FormsModule,
     StoreModule.forRoot({ tdd: todoReducer, tdl: todoReducer }),
+    StoreDevtoolsModule.instrument()
 
   ],
   providers: [],
