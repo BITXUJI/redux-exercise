@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addTodo, toggleTodo, removeTodo } from '../actions';
-import { IAppState } from '../reducer';
+import { IAppState } from '../../reducer';
 import { TodoService } from '../todo.service';
+import { taskState } from '../reducer';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { TodoService } from '../todo.service';
 export class TodoListComponent {
   todos$: Observable<any[]>;
 
-  constructor(private store: Store<{ tdl: IAppState }>,
+  constructor(private store: Store<{ tdl: taskState }>,
     private service: TodoService
   ) {
     this.todos$ = this.store.select(state => state.tdl.todos);

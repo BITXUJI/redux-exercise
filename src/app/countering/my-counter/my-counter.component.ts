@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { increment, decrement, reset } from '../actions';
-import { IAppState } from '../reducer';
+import { counterState } from '../reducer';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { IAppState } from '../reducer';
 export class MyCounterComponent {
   count$: Observable<number>;
 
-  constructor(private store: Store<{ counter: IAppState }>) {
+  constructor(private store: Store<{ counter: counterState }>) {
     this.count$ = store.select(state => state.counter.count);
 
   }

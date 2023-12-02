@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { IAppState } from "./reducer";
+import { IAppState } from "../reducer";
 import { fetchTodosSuccess } from "./actions";
 @Injectable()
 export class TodoService {

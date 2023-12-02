@@ -1,32 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
-import { todoReducer } from './reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpClientModule } from "@angular/common/http";
-import { TodoService } from './todo.service';
-import { MyCounterComponent } from './my-counter/my-counter.component';
+import { TaskingModule } from './tasking/tasking.module';
+import { CounteringModule } from './countering/countering.module';
+import { reducers } from './reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoDashboardComponent,
-    MyCounterComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    StoreModule.forRoot({ tdd: todoReducer, tdl: todoReducer, counter: todoReducer }),
-    StoreDevtoolsModule.instrument(),
-    HttpClientModule,
-
+    StoreModule.forRoot({}),
+    TaskingModule,
+    CounteringModule
   ],
-  providers: [TodoService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
