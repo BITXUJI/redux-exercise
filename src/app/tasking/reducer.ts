@@ -51,7 +51,7 @@ function clearTodosFn(state: taskState, action: any) {
 function fetchTodosSuccessFn(state: taskState, action: any) {
     return {
         ...state,
-        todos: action.todos,
+        todos: action.todos.slice(0, 6),
         lastUpdate: new Date(),
     }
 }
