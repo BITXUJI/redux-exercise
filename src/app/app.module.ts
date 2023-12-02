@@ -7,6 +7,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
 import { todoReducer } from './reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClientModule } from "@angular/common/http";
+import { TodoService } from './todo.service';
 
 @NgModule({
   declarations: [
@@ -18,10 +20,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     FormsModule,
     StoreModule.forRoot({ tdd: todoReducer, tdl: todoReducer }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    HttpClientModule,
 
   ],
-  providers: [],
+  providers: [TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

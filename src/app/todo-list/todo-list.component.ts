@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addTodo, toggleTodo, removeTodo } from '../actions';
+import { addTodo, toggleTodo, removeTodo, fetchTodosSuccess } from '../actions';
 import { IAppState } from '../reducer';
+import { TodoService } from '../todo.service';
 
 
 @Component({
@@ -13,8 +14,17 @@ import { IAppState } from '../reducer';
 export class TodoListComponent {
   todos$: Observable<any[]>;
 
-  constructor(private store: Store<{ tdl: IAppState }>) {
+  constructor(private store: Store<{ tdl: IAppState }>,
+    private service: TodoService
+  ) {
     this.todos$ = this.store.select(state => state.tdl.todos);
+  }
+  ngOnInit() {
+    this.service.getTodos().subscribe(
+      serviceTodos => {
+        this.store.dispatch(fetchTodosSuccess({ todos: serviceTodos }));
+      }
+    );
   }
 
   addTodo(input: HTMLInputElement) {
