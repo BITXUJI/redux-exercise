@@ -17,14 +17,12 @@ import { todoReducer } from './reducer';
         BrowserModule,
         StoreModule.forFeature('tdl', todoReducer),
         StoreModule.forFeature('tdd', todoReducer),
-        StoreDevtoolsModule.instrument(),
         HttpClientModule,
 
     ],
     exports: [
         TodoDashboardComponent,
-        TodoListComponent,
-        StoreModule
+        TodoListComponent
     ],
     providers: [TodoService],
     bootstrap: [TodoDashboardComponent, TodoListComponent]

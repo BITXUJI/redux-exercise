@@ -15,7 +15,6 @@ import { counterReducer } from './reducer';
     ],
     exports: [
         MyCounterComponent,
-        StoreModule
     ],
     providers: [],
     bootstrap: [MyCounterComponent]
