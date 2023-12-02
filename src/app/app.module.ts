@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { TaskingModule } from './tasking/tasking.module';
 import { CounteringModule } from './countering/countering.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { CounteringModule } from './countering/countering.module';
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument(),
     TaskingModule,
     CounteringModule
   ],
