@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addTodo, toggleTodo, removeTodo } from '../actions';
-import { IAppState } from '../../reducer';
 import { TodoService } from '../todo.service';
 import { taskState } from '../reducer';
 
